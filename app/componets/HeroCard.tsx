@@ -124,8 +124,9 @@ export default function Hero() {
 
       {/* Headline */}
       <div ref={textRef} className="z-10 text-center">
-        <h1 className="text-6xl font-bold tracking-[0.5em]">
-          W E L L C O M E I T Z F I Z Z
+        <h1 className="text-5xl font-bold tracking-[0.5em]">
+          W E L L C O M E
+          <span className="text-rose-500 pl-6">I T Z F I Z Z</span>
         </h1>
       </div>
     </section>
