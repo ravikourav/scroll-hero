@@ -14,18 +14,17 @@ export default function Hero() {
   const metricsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (
-      !heroRef.current ||
-      !card3.current ||
-      !titleRef.current ||
-      !metricsRef.current
-    )
-      return;
+    const hero = heroRef.current;
+    const card = card3.current;
+    const title = titleRef.current;
+    const metrics = metricsRef.current;
+
+    if (!hero || !card || !title || !metrics) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: heroRef.current,
+          trigger: hero,
           start: "top top",
           end: "+=1600",
           scrub: 1.2,
@@ -34,17 +33,17 @@ export default function Hero() {
       });
 
       // Set initial state safely
-      gsap.set(metricsRef.current.children, {
+      gsap.set(metrics.children, {
         opacity: 0,
         y: 40,
       });
 
       // Unfold animation
-      tl.to(card3.current, { y: 250, rotationX: -10 }, 0);
+      tl.to(card, { y: 250, rotationX: -10 }, 0);
 
       // Shrink title
       tl.to(
-        titleRef.current,
+        title,
         {
           scale: 0.6,
           opacity: 0,
@@ -54,7 +53,7 @@ export default function Hero() {
 
       // Reveal metrics
       tl.to(
-        metricsRef.current.children,
+        metrics.children,
         {
           opacity: 1,
           y: 0,
@@ -62,7 +61,7 @@ export default function Hero() {
         },
         0.6,
       );
-    }, heroRef);
+    }, hero);
 
     return () => ctx.revert();
   }, []);
